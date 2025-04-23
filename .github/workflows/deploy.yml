@@ -1,0 +1,22 @@
+name: Deploy to Self-Hosted NGINX Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to NGINX
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Deploy to NGINX
+      run: |
+        echo "Deploying to /var/www/html"
+        sudo rm -rf /var/www/html/*
+        sudo cp -r . /var/www/html/
+        echo "Deployment complete."
